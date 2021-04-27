@@ -1,0 +1,122 @@
+/*!
+Template :	ICOCrypto @by Softnio
+Theme	 :  Default
+Version	 :	1.9.2
+Updated	 :	01.15.2020
+*/
+/*! WRITE YOUR CUSTOM STYLE **/
+
+.header-logo .logo-desktop {
+	display: block !important;
+}
+
+.header-logo .logo-mobile {
+	display: none !important;
+}
+
+.swap-icon-right {
+	display: block !important;
+}
+
+.img_coin {
+	margin: 7px;
+	height: 30px;
+	position: absolute;
+}
+
+.banner-caption input {
+	width: 100%;
+	text-align: right;
+	font-size: 15px;
+	padding-left: 40px;
+}
+
+.banner-caption i {
+	font-size: 25px;
+	color: white;
+}
+
+.alert_list {
+	position: fixed;
+
+	right: 30px;
+	bottom: 30px;
+}
+
+.alert_list > * {
+	width: 300px;
+	padding: 15px 20px;
+	margin-top: 10px;
+
+	display: flex;
+	align-items: center;
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 600;
+
+	background-color: rgb(182, 54, 45);
+
+	color: white;
+}
+
+.alert_success {
+	background-color: rgb(41, 168, 41);
+}
+
+.loader {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.loader > p {
+	color: white;
+}
+
+.loader.active {
+	display: flex;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.loader > img {
+	animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+
+#btn_connect.connected {
+	background-color: rgb(88 7 7) !important;
+}
+
+@media (max-width: 576px) {
+	.header-logo .logo-desktop {
+		display: none !important;
+	}
+
+	.header-logo .logo-mobile {
+		display: block !important;
+	}
+
+	.swap-icon-right {
+		display: none !important;
+	}
+
+	.banner-caption input {
+		width: 80%;
+	}
+}
+/* END @iO */
+/* END @iO */
