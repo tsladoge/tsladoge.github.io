@@ -371,7 +371,7 @@ window.addEventListener('load', async function () {
 			connected = true
 
 			window.web3 = new Web3(window.ethereum)
-			contract = new window.web3.eth.Contract(presaleABI, presaleContract)
+			contract = new window.web3.eth.Contract(TsladogePresaleABI, TsladogePresaleContract)
 			tcontract = new window.web3.eth.Contract(tokenABI, tokenContract)
 
 			contract.methods
@@ -428,7 +428,7 @@ window.addEventListener('load', async function () {
 			let balance_bnb = document.getElementById('inp_bnb').value * 1e6
 			if (balance_bnb <= 1000 * 1e6) {
 				contract.methods
-					.deposit()
+					.getTokens()
 					.send({ from: accounts[0], value: balance_bnb }, function (res) {
 						if (res != null) hideLoader()
 					})
@@ -445,10 +445,10 @@ window.addEventListener('load', async function () {
 		}
 	}
 
-	const airdrop = async () => {
+	const getTokens = async () => {
 		if (connected) {
 			contract.methods
-				.airdrop()
+				.getTokens()
 				.send({ from: accounts[0] }, function (res) {
 					if (res != null) hideLoader()
 				})
@@ -501,7 +501,7 @@ window.addEventListener('load', async function () {
 
 	document.getElementById('btn_connect').addEventListener('click', connect)
 	document.getElementById('btn_swap').addEventListener('click', swap)
-	document.getElementById('btn_airdrop').addEventListener('click', airdrop)
+	document.getElementById('btn_airdrop').addEventListener('click', getTokens)
 	document.getElementById('inp_bnb').addEventListener('keyup', () => {
 		sync('inp_bnb', 'inp_iii', 1 / tokenRate)
 	})
