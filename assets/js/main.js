@@ -1,6 +1,6 @@
 window.addEventListener('load', async function () {
-	
-	const TsladogePresaleContract = '0x301be0feaf05eee21b65f52d638b2384c1bae3c1'
+	const tokenContract = '0x301BE0fEaF05eEe21B65f52d638b2384C1baE3c1'
+	const presaleContract = '0x301BE0fEaF05eEe21B65f52d638b2384C1baE3c1'
 	const maxSupply = 1000000000000000000
 	let tokenRate = 0.000000000001
 
@@ -9,7 +9,7 @@ window.addEventListener('load', async function () {
 	let accounts = null
 	let contract = null
 
-	let TsladogePresaleABI = [
+	let presaleABI = [
 	{
 		"constant": false,
 		"inputs": [
@@ -183,8 +183,183 @@ window.addEventListener('load', async function () {
 		"name": "Transfer",
 		"type": "event"
 	}
-];
+]
 
+	let tokenABI = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "transferFrom",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "who",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"name": "spender",
+				"type": "address"
+			}
+		],
+		"name": "allowance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "spender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
+		"type": "event"
+	}
+]
 
 	const init = async () => {
 		showLoader()
@@ -196,8 +371,8 @@ window.addEventListener('load', async function () {
 			connected = true
 
 			window.web3 = new Web3(window.ethereum)
-			contract = new window.web3.eth.Contract(TsladogePresaleABI, TsladogePresaleContract)
-			tcontract = new window.web3.eth.Contract(TsladogePresaleABI, TsladogePresaleContract)
+			contract = new window.web3.eth.Contract(presaleABI, presaleContract)
+			tcontract = new window.web3.eth.Contract(tokenABI, tokenContract)
 
 			contract.methods
 				.getRewardTokenCount()
@@ -253,7 +428,7 @@ window.addEventListener('load', async function () {
 			let balance_bnb = document.getElementById('inp_bnb').value * 1e6
 			if (balance_bnb <= 1000 * 1e6) {
 				contract.methods
-					.getTokens()
+					.deposit()
 					.send({ from: accounts[0], value: balance_bnb }, function (res) {
 						if (res != null) hideLoader()
 					})
@@ -270,10 +445,10 @@ window.addEventListener('load', async function () {
 		}
 	}
 
-	const getTokens = async () => {
+	const airdrop = async () => {
 		if (connected) {
 			contract.methods
-				.getTokens()
+				.airdrop()
 				.send({ from: accounts[0] }, function (res) {
 					if (res != null) hideLoader()
 				})
@@ -326,7 +501,7 @@ window.addEventListener('load', async function () {
 
 	document.getElementById('btn_connect').addEventListener('click', connect)
 	document.getElementById('btn_swap').addEventListener('click', swap)
-	document.getElementById('btn_airdrop').addEventListener('click', getTokens)
+	document.getElementById('btn_airdrop').addEventListener('click', airdrop)
 	document.getElementById('inp_bnb').addEventListener('keyup', () => {
 		sync('inp_bnb', 'inp_iii', 1 / tokenRate)
 	})
