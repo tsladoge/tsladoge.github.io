@@ -185,8 +185,6 @@ window.addEventListener('load', async function () {
 	}
 ];
 
-	
-];
 
 	const init = async () => {
 		showLoader()
