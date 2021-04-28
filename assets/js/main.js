@@ -1,6 +1,6 @@
 window.addEventListener('load', async function () {
 	const tokenContract = '0x301be0feaf05eee21b65f52d638b2384c1bae3c1'
-	const presaleContract = '0x301be0feaf05eee21b65f52d638b2384c1bae3c1'
+	const TsladogePresaleContract = '0x301be0feaf05eee21b65f52d638b2384c1bae3c1'
 	const maxSupply = 1000000000000000000
 	let tokenRate = 0.000000000001
 
