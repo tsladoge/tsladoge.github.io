@@ -1,4 +1,0 @@
-This is a Brave Rewards publisher verification file.
-
-Domain: tsladoge.com
-Token: a41181ebc6a07dd7beb7756a2d9b7ba261d58d2a53b4557c8870ca2cb923d7b4
